@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 
 @Repository
-//@Transactional read up, buttercup
+//@Transactional (read up, buttercup)
 public interface EmployerRepository extends CrudRepository<Employer, Integer> {
 
 }

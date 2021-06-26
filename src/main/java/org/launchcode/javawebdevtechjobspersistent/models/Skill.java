@@ -1,6 +1,5 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
-
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -8,20 +7,20 @@ import javax.validation.constraints.Size;
 @Entity
 public class Skill extends AbstractEntity {
 
-    @NotEmpty(message = "Please be sure to enter required job skills")
+    @NotEmpty(message = "Please be sure to enter a skill description")
     @Size(min = 3, max = 500, message = "Not to exceed 500 characters")
-    private String necessarySkills;
+    private String description;
 
-    public Skill(String necessarySkills) {
-        this.necessarySkills = necessarySkills;
+    public Skill(String description) {
+        this.description = description;
     }
     public Skill() {};
 
-    public String getNecessarySkills() {
-        return necessarySkills;
+    public String getDescription() {
+        return description;
     }
 
-    public void setNecessarySkills(String necessarySkills) {
-        this.necessarySkills = necessarySkills;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

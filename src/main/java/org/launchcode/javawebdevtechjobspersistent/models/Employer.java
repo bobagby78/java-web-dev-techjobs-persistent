@@ -14,7 +14,6 @@ public class Employer extends AbstractEntity {
     public Employer(String location) {
         this.location = location;
     }
-
     public Employer(){};
 
     public String getLocation() {
