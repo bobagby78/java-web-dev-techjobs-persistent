@@ -7,6 +7,8 @@ import javax.validation.constraints.Size;
 @Entity
 public class Skill extends AbstractEntity {
 
+    //add job field here. think about the type of object(Job, I'm sure)
+
     @NotEmpty(message = "Please be sure to enter a skill description")
     @Size(min = 3, max = 500, message = "Not to exceed 500 characters")
     private String description;
