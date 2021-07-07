@@ -15,8 +15,8 @@ public class Employer extends AbstractEntity {
     @Size (min =3, max = 50, message = "Location needs to be between 3 and 50 characters")
     private String location;
 
-    @OneToMany //(mappedBy = "employer") //double check that the "employer" field is correct
-    @JoinColumn //(name= "primary_key", referencedColumnName="foreign_key")
+    @OneToMany //Employer is the "owner" side of the Employer/Job relationship.
+    @JoinColumn (name= "primary_key", referencedColumnName="foreign_key")
     private List<Job> jobs= new ArrayList<>();
 
     public Employer(String location) {
