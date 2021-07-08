@@ -39,7 +39,7 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("add")
+    @GetMapping("add") //everything here words as expected
     public String displayAddJobForm(Model model) {
         model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
@@ -48,11 +48,11 @@ public class HomeController {
         return "add";
     }
 
-    @PostMapping("add")
+    @PostMapping("add") //not adding employer id to the job table???
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                     Errors errors, Model model
-                                    , @RequestParam int employerId
-                                    , @RequestParam List<Integer> skills) {
+                                    //, @RequestParam int employerId , @RequestParam List<Integer> skills //Did I even Put this here for a reason?
+                                    ) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
@@ -62,7 +62,7 @@ public class HomeController {
         return "redirect:";
     }
 
-    @GetMapping("view/{jobId}")
+    @GetMapping("view/{jobId}") //all good in the hood.
     public String displayViewJob(Model model, @PathVariable int jobId) {
 
         return "view";
