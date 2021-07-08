@@ -2,6 +2,8 @@ package org.launchcode.javawebdevtechjobspersistent.controllers;
 
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
 import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
+import org.launchcode.javawebdevtechjobspersistent.models.data.JobRepository;
+import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,15 @@ public class HomeController {
     @Autowired
     private EmployerRepository employerRepository;
 
-    @RequestMapping("")
+    @Autowired
+    private SkillRepository skillRepository;
+
+    @Autowired
+    private JobRepository jobRepository;
+
+
+
+    @GetMapping
     public String index(Model model) {
 
         model.addAttribute("title", "My Jobs");
@@ -34,18 +44,21 @@ public class HomeController {
         model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
         model.addAttribute("employers", employerRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
         return "add";
     }
 
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
-                                       Errors errors, Model model, @RequestParam int employerId, @RequestParam List<Integer> skills) {
+                                    Errors errors, Model model
+                                    , @RequestParam int employerId
+                                    , @RequestParam List<Integer> skills) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
             return "add";
         }
-
+        jobRepository.save(newJob);
         return "redirect:";
     }
 
@@ -54,6 +67,5 @@ public class HomeController {
 
         return "view";
     }
-
 
 }
