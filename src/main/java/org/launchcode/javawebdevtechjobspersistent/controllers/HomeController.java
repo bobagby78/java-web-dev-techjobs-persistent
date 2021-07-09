@@ -39,19 +39,19 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("add") //everything here words as expected
+    @GetMapping("add") //everything here works as expected
     public String displayAddJobForm(Model model) {
-        model.addAttribute("title", "Add Job");
+        model.addAttribute("title", "Add Job"); //on the view side, title is in he header, so it comes from fragments.html
         model.addAttribute(new Job());
-        model.addAttribute("employers", employerRepository.findAll());
-        model.addAttribute("skills", skillRepository.findAll());
+        model.addAttribute("employers", employerRepository.findAll()); //add.html uses this to populate the dropdown
+        model.addAttribute("skills", skillRepository.findAll()); //add.html uses this to populate the checkboxes
         return "add";
     }
 
     @PostMapping("add") //not adding employer id to the job table???
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                     Errors errors, Model model
-                                    //, @RequestParam int employerId , @RequestParam List<Integer> skills //Did I even Put this here for a reason?
+                                    , @RequestParam int employerId //, @RequestParam List<Integer> skills //Did I even Put this here for a reason?
                                     ) {
 
         if (errors.hasErrors()) {

@@ -1,14 +1,16 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Job extends AbstractEntity{
 
     @ManyToOne
+    @NotNull(message="Please choose an employer from the dropdown")
     private Employer employer;
 
-    private String skill;
+    private String skill; //change me to a Skill Data Type instead of a String
 
     public Job() {}
 
