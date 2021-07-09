@@ -48,16 +48,17 @@ public class HomeController {
         return "add";
     }
 
-    @PostMapping("add") //not adding employer id to the job table???
+    @PostMapping("add") //follow model in EventController 38-50 to finish this up
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
+                                    @RequestParam(required = false) Integer employerId,
                                     Errors errors, Model model
-                                    , @RequestParam int employerId //, @RequestParam List<Integer> skills //Did I even Put this here for a reason?
                                     ) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
             return "add";
         }
+        newJob.setEmployer(Integer employerId);
         jobRepository.save(newJob);
         return "redirect:";
     }
