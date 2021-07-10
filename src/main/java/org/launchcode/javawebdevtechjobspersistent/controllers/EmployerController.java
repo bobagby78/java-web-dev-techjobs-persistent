@@ -20,13 +20,13 @@ public class EmployerController {
 
     @GetMapping
     public String displayAllEmployers (Model model){
-        model.addAttribute("title", "All Employers");
-        model.addAttribute("employers", employerRepository.findAll());
+        model.addAttribute("title", "All Employers"); // Sets the view up with attribute "title" set to "All Employers" to put the title on the employers/index page
+        model.addAttribute("employers", employerRepository.findAll()); //the template to show the employers uses the attribute "employers"  and the method .findAll() to pull all the employers in the mySQL employers table (AKA all of the entries in the repository of Employers).
         return "employers/index";
     }
 
     @GetMapping("add")
-    public String displayAddEmployerForm(Model model) {
+    public String displayAddEmployerForm(Model model) { //sets up the employers/add.html template to accept a new Employer, automatically requiring all the necessary fields within
         model.addAttribute(new Employer());
         return "employers/add";
     }
@@ -48,7 +48,7 @@ public class EmployerController {
 
         Optional optEmployer = employerRepository.findById(employerId);
         if (optEmployer.isPresent()) {
-            Employer employer = (Employer) optEmployer.get(); //change to .findAll()?
+            Employer employer = (Employer) optEmployer.get();
             model.addAttribute("employer", employer);
             return "employers/view";
         } else {

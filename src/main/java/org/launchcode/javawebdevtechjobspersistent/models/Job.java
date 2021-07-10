@@ -1,24 +1,23 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Job extends AbstractEntity{
 
     @ManyToOne
+    @NotNull(message="Please choose an employer from the dropdown")
     private Employer employer;
-    private String skills;
 
-    public Job() {
-    }
+    private String skill; //change me to a Skill Data Type instead of a String
 
-    public Job(Employer employer, String skills) {
-        super();
+    public Job() {}
+
+    public Job(Employer employer, String skill) {
         this.employer = employer;
-        this.skills = skills;
+        this.skill = skill;
     }
-
-    // Getters and setters.
 
     public Employer getEmployer() {
         return employer;
@@ -28,11 +27,11 @@ public class Job extends AbstractEntity{
         this.employer = employer;
     }
 
-    public String getSkills() {
-        return skills;
+    public String getSkill() {
+        return skill;
     }
 
-    public void setSkills(String skills) {
-        this.skills = skills;
+    public void setSkill(String skill) {
+        this.skill = skill;
     }
 }

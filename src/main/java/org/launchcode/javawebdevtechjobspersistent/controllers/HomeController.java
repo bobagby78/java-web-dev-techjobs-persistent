@@ -30,7 +30,8 @@ public class HomeController {
     private JobRepository jobRepository;
 
 
-    @RequestMapping("")
+
+    @GetMapping
     public String index(Model model) {
 
         model.addAttribute("title", "My Jobs");
@@ -38,37 +39,34 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("add")
+    @GetMapping("add") //everything here works as expected
     public String displayAddJobForm(Model model) {
-        model.addAttribute("title", "Add Job");
+        model.addAttribute("title", "Add Job"); //on the view side, title is in he header, so it comes from fragments.html
         model.addAttribute(new Job());
-        model.addAttribute("employers", employerRepository.findAll());
-        model.addAttribute("skills", skillRepository.findAll());
+        model.addAttribute("employers", employerRepository.findAll()); //add.html uses this to populate the dropdown
+        model.addAttribute("skills", skillRepository.findAll()); //add.html uses this to populate the checkboxes
         return "add";
     }
 
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
-                                        Errors errors, Model model
-                                        , @RequestParam int employerId
-                                        //, @RequestParam List<Integer> skills
+                                    @RequestParam(required = false) Integer employerId,
+                                    Errors errors, Model model
                                     ) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
             return "add";
         }
+        newJob.setEmployer(Integer employerId);
         jobRepository.save(newJob);
-
-
         return "redirect:";
     }
 
-    @GetMapping("view/{jobId}")
+    @GetMapping("view/{jobId}") //all good in the hood.
     public String displayViewJob(Model model, @PathVariable int jobId) {
 
         return "view";
     }
-
 
 }

@@ -5,5 +5,6 @@ SELECT * FROM job;
 SELECT * FROM employer WHERE location LIKE "Saint Louis, MO";
 
 ## Part 3: Test it with SQL
+DROP TABLE job;
 
 ## Part 4: Test it with SQL
