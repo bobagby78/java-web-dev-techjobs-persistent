@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 public class Job extends AbstractEntity{
 
     @ManyToOne
-    @NotNull(message="Please choose an employer from the dropdown")
+    @NotNull(message = "Please choose an employer from the dropdown")
     private Employer employer;
 
     private String skill; //change me to a Skill Data Type instead of a String
