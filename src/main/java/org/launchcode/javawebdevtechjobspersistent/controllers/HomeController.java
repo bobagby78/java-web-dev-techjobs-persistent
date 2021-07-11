@@ -2,6 +2,7 @@ package org.launchcode.javawebdevtechjobspersistent.controllers;
 
 import org.launchcode.javawebdevtechjobspersistent.models.Employer;
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
+import org.launchcode.javawebdevtechjobspersistent.models.Skill;
 import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.JobRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
@@ -12,6 +13,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -52,6 +54,7 @@ public class HomeController {
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                     @RequestParam(required = false) Integer employerId,
+                                    @RequestParam(required = false) List<Integer> skills,
                                     Errors errors, Model model
                                     ) {
 
@@ -59,8 +62,8 @@ public class HomeController {
             model.addAttribute("title", "Add Job");
             return "add";
         }
-//TODO: figure out what's wrong or missing from the block below
-        //adding a job results in an error: Field error in object 'job' on field 'employer': rejected value [null]; codes
+        List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+        newJob.setSkill(skillObjs);
         Optional<Employer> optionalEmployer = employerRepository.findById(employerId);
         if (optionalEmployer.isPresent()){
             Employer employer = optionalEmployer.get();
