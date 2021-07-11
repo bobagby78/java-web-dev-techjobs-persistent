@@ -18,7 +18,7 @@ public abstract class AbstractEntity {
     @Size (min= 3, max =250, message = "The name must be between 3 and 250 characters" ) //sets constraints on the length of the field
     private String name;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

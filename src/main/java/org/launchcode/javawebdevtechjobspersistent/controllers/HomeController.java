@@ -12,7 +12,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -60,12 +59,12 @@ public class HomeController {
             model.addAttribute("title", "Add Job");
             return "add";
         }
-//TODO: figure out what's missing from the block below
+//TODO: figure out what's wrong or missing from the block below
         //adding a job results in an error: Field error in object 'job' on field 'employer': rejected value [null]; codes
         Optional<Employer> optionalEmployer = employerRepository.findById(employerId);
         if (optionalEmployer.isPresent()){
-            //Employer employer = optionalEmployer.get();
-            newJob.setEmployer(optionalEmployer.get());
+            Employer employer = optionalEmployer.get();
+            newJob.setEmployer(employer);
         }
 
         jobRepository.save(newJob);
