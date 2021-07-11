@@ -10,11 +10,12 @@ public class Job extends AbstractEntity{
     @ManyToOne
     private Employer employer;
 
-    private String skill; //change me to a Skill Data Type instead of a String
+    @ManyToMany
+    private Skill skill; //change me to a Skill Data Type instead of a String
 
     public Job() {}
 
-    public Job(Employer employer, String skill) {
+    public Job(Employer employer, Skill skill) {
         this.employer = employer;
         this.skill = skill;
     }
@@ -27,11 +28,11 @@ public class Job extends AbstractEntity{
         this.employer = employer;
     }
 
-    public String getSkill() {
+    public Skill getSkill() {
         return skill;
     }
 
-    public void setSkill(String skill) {
+    public void setSkill(Skill skill) {
         this.skill = skill;
     }
 }
