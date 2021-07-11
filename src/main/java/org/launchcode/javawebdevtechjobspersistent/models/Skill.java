@@ -10,9 +10,7 @@ import java.util.List;
 @Entity
 public class Skill extends AbstractEntity {
 
-    //add job field here. think about the type of object(arraylist containing Job objects [Jobjects])
-
-    @ManyToMany(mappedBy = "skill") //this originally said skills (according to the text), but I think that was wrong as it's reaching into Job and looking for a related field, which is called skill.
+    @ManyToMany(mappedBy = "skills")
     private List<Job> jobs = new ArrayList<>();
 
     @NotEmpty(message = "Please be sure to enter a skill description")
