@@ -49,7 +49,7 @@ public class SkillController {
         return "redirect:";
     }
 
-    @GetMapping("view/{skillId}")
+    @GetMapping("view/{skillId}")//add jobRepository here? Should be optional, check the examples and go crazy.
     public String displayViewSkill(Model model, @PathVariable int skillId){
         Optional optSkill = skillRepository.findById(skillId);
         if(optSkill.isPresent()){
