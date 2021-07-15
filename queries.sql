@@ -11,8 +11,6 @@ SELECT name FROM employer WHERE location LIKE "Saint Louis, MO";
 DROP TABLE job;
 
 ## Part 4: Test it with SQL
-return a list of the names and descriptions of all skills
-
 
 SELECT job.name, skill.name, skill.description
 FROM skill
