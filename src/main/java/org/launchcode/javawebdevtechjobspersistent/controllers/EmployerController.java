@@ -31,7 +31,7 @@ public class EmployerController {
         return "employers/add";
     }
 
-    @PostMapping("add")
+    @PostMapping("add") //when an employer is added through the form, this pushes the database via employerRepository
     public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer,
                                     Errors errors, Model model) {
         if (errors.hasErrors()) {
@@ -43,13 +43,13 @@ public class EmployerController {
         return "redirect:";
     }
 
-    @GetMapping("view/{employerId}")
+    @GetMapping("view/{employerId}") // displays the employers that have been created. pulls the database info with employerRepository.findById. employerId is the value set by the view.
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
 
         Optional optEmployer = employerRepository.findById(employerId);
-        if (optEmployer.isPresent()) {
+        if (optEmployer.isPresent()) { //if an employer exists in the database...
             Employer employer = (Employer) optEmployer.get();
-            model.addAttribute("employer", employer);
+            model.addAttribute("employer", employer); //bring it into the view using the attribute employer
             return "employers/view";
         } else {
             return "redirect:../";
